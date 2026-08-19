@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vivek Kumar — Marketing, Built on Data</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16231F;
+    --teal:#0F3D3E;
+    --teal-deep:#0A2C2D;
+    --paper:#F1F3EF;
+    --paper-raise:#FFFFFF;
+    --gold:#B98A2E;
+    --gold-soft:#E4CFA0;
+    --line: rgba(22,35,31,0.12);
+    --muted: rgba(22,35,31,0.62);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  /* NAV */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(241,243,239,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
+  .nav-name{font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem;}
+  .nav-links{display:flex; gap:28px; font-size:0.86rem;}
+  .nav-links a{text-decoration:none; color:var(--muted); transition:color .2s;}
+  .nav-links a:hover{color:var(--teal);}
+  @media (max-width:640px){ .nav-links{gap:16px; font-size:0.75rem;} }
+
+  /* HERO */
+  .hero{padding:96px 0 64px; position:relative;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    margin-bottom:20px;
+    display:block;
+  }
+  h1.headline{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(2.4rem, 5.4vw, 4.1rem);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    max-width:14ch;
+  }
+  h1.headline em{font-style:italic; color:var(--teal); font-weight:500;}
+  .sub{
+    max-width:52ch; font-size:1.08rem; color:var(--muted);
+    margin-top:26px;
+  }
+  .hero-cta{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    padding:13px 22px;
+    border-radius:var(--radius);
+    text-decoration:none;
+    display:inline-block;
+    border:1px solid var(--teal);
+    transition:all .2s;
+  }
+  .btn-solid{background:var(--teal); color:var(--paper);}
+  .btn-solid:hover{background:var(--teal-deep);}
+  .btn-line{color:var(--teal);}
+  .btn-line:hover{background:var(--teal); color:var(--paper);}
+
+  /* KPI STRIP — signature element */
+  .kpi-strip{
+    margin-top:64px;
+    background:var(--teal);
+    color:var(--paper);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .kpi-row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+  }
+  @media (max-width:760px){ .kpi-row{grid-template-columns:repeat(2,1fr);} }
+  .kpi{
+    padding:26px 22px;
+    border-right:1px solid rgba(241,243,239,0.14);
+    border-bottom:1px solid rgba(241,243,239,0.14);
+  }
+  .kpi:nth-child(4){border-right:none;}
+  @media (max-width:760px){ .kpi:nth-child(2n){border-right:none;} }
+  .kpi-num{font-family:'IBM Plex Mono', monospace; font-size:1.7rem; color:var(--gold-soft); font-weight:500;}
+  .kpi-label{font-size:0.75rem; color:rgba(241,243,239,0.72); margin-top:6px;}
+
+  /* SECTION LABELS */
+  .section{padding:88px 0;}
+  .section-head{margin-bottom:48px;}
+  .section-eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(--gold);
+    text-transform:uppercase; letter-spacing:0.12em; display:block; margin-bottom:12px;
+  }
+  h2.section-title{
+    font-family:'Fraunces', serif; font-weight:600; font-size:clamp(1.7rem,3vw,2.3rem);
+  }
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px;}
+  @media (max-width:760px){ .about-grid{grid-template-columns:1fr;} }
+  .about-body p{margin-bottom:18px; color:var(--ink); font-size:1.02rem;}
+  .about-side{border-left:2px solid var(--gold); padding-left:24px;}
+  .about-side h3{font-family:'IBM Plex Mono', monospace; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:10px;}
+  .about-side ul{list-style:none; font-size:0.94rem; margin-bottom:24px;}
+  .about-side li{padding:6px 0; border-bottom:1px dashed var(--line);}
+
+  /* CASE STUDIES */
+  .case{
+    background:var(--paper-raise);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    margin-bottom:28px;
+    overflow:hidden;
+  }
+  .case-head{
+    padding:34px 36px;
+    display:flex; justify-content:space-between; align-items:flex-start; gap:24px;
+    cursor:pointer;
+  }
+  @media (max-width:640px){ .case-head{flex-direction:column; padding:26px 22px;} }
+  .case-tag{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--gold);
+    text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px; display:block;
+  }
+  .case-title{font-family:'Fraunces', serif; font-size:1.55rem; font-weight:600;}
+  .case-role{font-size:0.92rem; color:var(--muted); margin-top:8px;}
+  .case-toggle{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--teal);
+    white-space:nowrap; border:1px solid var(--teal); padding:8px 16px; border-radius:var(--radius);
+  }
+  .case-body{
+    max-height:0; overflow:hidden; transition:max-height .4s ease;
+    border-top:1px solid var(--line);
+  }
+  .case-body.open{max-height:2400px;}
+  .case-body-inner{padding:32px 36px 40px;}
+  @media (max-width:640px){ .case-body-inner{padding:24px 22px 32px;} }
+  .case-body-inner h4{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin:22px 0 10px;}
+  .case-body-inner h4:first-child{margin-top:0;}
+  .case-body-inner p{margin-bottom:12px; font-size:0.98rem;}
+  .case-body-inner ul{padding-left:20px; margin-bottom:12px;}
+  .case-body-inner li{margin-bottom:6px; font-size:0.96rem;}
+  .stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:18px 0 8px;}
+  @media (max-width:640px){ .stat-row{grid-template-columns:1fr 1fr;} }
+  .stat-box{background:var(--paper); border:1px solid var(--line); padding:16px; border-radius:var(--radius);}
+  .stat-box .n{font-family:'IBM Plex Mono', monospace; color:var(--teal); font-size:1.3rem;}
+  .stat-box .l{font-size:0.78rem; color:var(--muted); margin-top:4px;}
+  .tool-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:0.74rem;
+    background:var(--paper); border:1px solid var(--line);
+    padding:5px 11px; border-radius:20px; color:var(--teal);
+  }
+
+  /* SKILLS */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){ .skills-grid{grid-template-columns:repeat(2,1fr);} }
+  .skill-cell{background:var(--paper-raise); padding:22px;}
+  .skill-cell h4{font-family:'Fraunces', serif; font-size:1.05rem; margin-bottom:8px;}
+  .skill-cell p{font-size:0.86rem; color:var(--muted);}
+
+  /* CERTS */
+  .cert-list{display:flex; flex-direction:column; gap:0;}
+  .cert-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 0; border-bottom:1px solid var(--line);
+  }
+  .cert-row:first-child{border-top:1px solid var(--line);}
+  .cert-name{font-weight:500;}
+  .cert-issuer{font-size:0.85rem; color:var(--muted);}
+  .cert-year{font-family:'IBM Plex Mono', monospace; font-size:0.82rem; color:var(--gold);}
+
+  /* CONTACT */
+  .contact{
+    background:var(--teal); color:var(--paper); border-radius:var(--radius);
+    padding:56px 48px; text-align:center;
+  }
+  @media (max-width:640px){ .contact{padding:40px 24px;} }
+  .contact h2{font-family:'Fraunces', serif; font-size:clamp(1.6rem,3.4vw,2.2rem); margin-bottom:16px;}
+  .contact p{color:rgba(241,243,239,0.78); max-width:44ch; margin:0 auto 30px;}
+  .contact-links{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .btn-ghost{
+    border:1px solid rgba(241,243,239,0.4); color:var(--paper);
+    font-family:'IBM Plex Mono', monospace; font-size:0.82rem;
+    padding:13px 22px; border-radius:var(--radius); text-decoration:none;
+    transition:all .2s;
+  }
+  .btn-ghost:hover{background:rgba(241,243,239,0.12);}
+
+  footer{padding:36px 0; text-align:center; font-size:0.8rem; color:var(--muted); font-family:'IBM Plex Mono', monospace;}
+
+  :focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="nav-name">Vivek Kumar</div>
+    <nav class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#certs">Credentials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">MSc Marketing · Nottingham Business School</span>
+    <h1 class="headline">Marketing, <em>built on data</em>, not guesswork.</h1>
+    <p class="sub">I audit what's actually happening — traffic, engagement, service quality — then turn it into strategy a client can act on. Currently looking for a marketing placement.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-solid">See the work</a>
+      <a href="mailto:vivek12345kumarroy@gmail.com" class="btn btn-line">Get in touch</a>
+    </div>
+
+    <div class="kpi-strip">
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-num mono">23×</div>
+          <div class="kpi-label">Higher engagement rate found in Moyra UK's Instagram audit vs. its nearest competitor</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-num mono">8.2–8.5<span style="font-size:1rem;">/10</span></div>
+          <div class="kpi-label">Faculty rating for a 52-slide client strategy deck I led</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-num mono">8</div>
+          <div class="kpi-label">Semi-structured interviews analysed in a UK casual-dining service study</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-num mono">5</div>
+          <div class="kpi-label">Person research team I managed from proposal to client presentation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-body">
+        <span class="section-eyebrow">About</span>
+        <h2 class="section-title" style="margin-bottom:24px;">From pitch to spreadsheet, and back again.</h2>
+        <p>I'm an MSc Marketing student at Nottingham Business School, working at the point where audits, numbers, and storytelling meet. My work usually starts with a technical question — why is this page slow, why is this brand losing engagement — and ends with a deck or report a client can actually use.</p>
+        <p>Before this, I worked as a Marketing Support Intern at Tech Mahindra, building performance dashboards and running SQL queries across global reporting cycles. Before that, I spent five years as a professional cricketer in India — which is honestly where the discipline and composure under pressure I bring to deadline-heavy project work actually comes from.</p>
+      </div>
+      <div class="about-side">
+        <h3>Currently</h3>
+        <ul>
+          <li>Seeking a marketing placement, Aug 2026</li>
+          <li>HubSpot certified — Inbound & Social</li>
+          <li>Based in Nottingham, UK</li>
+        </ul>
+        <h3>Reach me</h3>
+        <ul>
+          <li>vivek12345kumarroy@gmail.com</li>
+          <li>linkedin.com/in/vivekkumar-5b1b072b8</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Selected Work</span>
+      <h2 class="section-title">Two research-led case studies.</h2>
+    </div>
+
+    <!-- CASE 1: MOYRA -->
+    <div class="case">
+      <div class="case-head" onclick="toggleCase('case1')">
+        <div>
+          <span class="case-tag">Live Client Consultancy · Project Manager</span>
+          <div class="case-title">Moyra UK — From Engagement to Conversion</div>
+          <div class="case-role">A digital marketing audit and growth strategy for the UK's exclusive distributor of Moyra Hungary nail art products.</div>
+        </div>
+        <div class="case-toggle mono" id="case1-toggle">View case study ↓</div>
+      </div>
+      <div class="case-body" id="case1">
+        <div class="case-body-inner">
+          <h4>The Brief</h4>
+          <p>As Project Manager for a 5-person MSc consultancy team, I led the research into Moyra UK's social media performance and website/customer journey, diagnosing why a smaller, more engaged brand was under-leveraging its position against larger competitors.</p>
+
+          <h4>What I Did</h4>
+          <ul>
+            <li>Ran technical and content audits using Semrush, Google PageSpeed Insights, SEO Site Checkup, and GTmetrix</li>
+            <li>Analysed Instagram and TikTok performance data via Socialinsider against a named competitor, Crystal Nails UK</li>
+            <li>Directed the social media and website research strands across the team, and managed timeline, allocation, and deliverable quality</li>
+            <li>Translated audit findings into a client-facing PDF report and a 6-tab Excel analysis workbook</li>
+            <li>Built and delivered a 52-slide strategy presentation in Canva, including full speaker notes</li>
+          </ul>
+
+          <h4>Key Finding</h4>
+          <p>Moyra UK's Instagram engagement rate (2.58%) was 23× higher than Crystal Nails UK's (0.11%) — despite Crystal Nails having a larger following. The real opportunity wasn't reach, it was conversion: turning an already-engaged audience into buyers, which reframed the whole strategy.</p>
+
+          <div class="stat-row">
+            <div class="stat-box"><div class="n mono">79%</div><div class="l">Site health score (Semrush)</div></div>
+            <div class="stat-box"><div class="n mono">46/100</div><div class="l">Mobile PageSpeed score</div></div>
+            <div class="stat-box"><div class="n mono">11.0s</div><div class="l">Largest Contentful Paint</div></div>
+          </div>
+
+          <h4>Frameworks Applied</h4>
+          <p>STP, Keller's CBBE model, AIDA, Commitment-Trust Theory, and Relationship Marketing Theory — grounded in Chaffey &amp; Ellis-Chadwick (2019) and Kotler &amp; Keller (2022).</p>
+
+          <div class="tool-tags">
+            <span class="tag">Semrush</span>
+            <span class="tag">GTmetrix</span>
+            <span class="tag">Socialinsider</span>
+            <span class="tag">Excel</span>
+            <span class="tag">Canva</span>
+            <span class="tag">Project Management</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 2: PIZZAEXPRESS -->
+    <div class="case">
+      <div class="case-head" onclick="toggleCase('case2')">
+        <div>
+          <span class="case-tag">Qualitative Research · Researcher &amp; Interviewer</span>
+          <div class="case-title">PizzaExpress — Diagnosing the Service Quality Gap</div>
+          <div class="case-role">An interpretivist study into how wait time, food consistency, and staff behaviour shape perceived value in UK casual dining.</div>
+        </div>
+        <div class="case-toggle mono" id="case2-toggle">View case study ↓</div>
+      </div>
+      <div class="case-body" id="case2">
+        <div class="case-body-inner">
+          <h4>The Brief</h4>
+          <p>Working in a 4-person team for the MSc Marketing Research module, I helped investigate why PizzaExpress — despite strong brand recognition — was facing recurring customer complaints about service delays, food inconsistency, and staff behaviour, and what that meant for value perception and food waste.</p>
+
+          <h4>What I Did</h4>
+          <ul>
+            <li>Sourced and triangulated secondary evidence from Trustpilot and TripAdvisor reviews against primary interview data</li>
+            <li>Conducted 2 of 8 semi-structured interviews with NTU students who had dined at PizzaExpress in the past 12 months</li>
+            <li>Applied SERVQUAL and Expectation-Disconfirmation Theory to structure the interview guide and interpret findings</li>
+            <li>Contributed to reflexive thematic analysis (Braun and Clarke, 2006) identifying three core themes across the dataset</li>
+          </ul>
+
+          <h4>Key Finding</h4>
+          <p>Dissatisfaction wasn't driven by wait time alone — it was driven by <em>uncommunicated</em> wait time. Customers tolerated real delays when staff explained them, but silence turned manageable inconvenience into perceived negligence. Food quality inconsistency also linked directly to avoidable food waste, tying the commercial problem to UN SDG 12.</p>
+
+          <div class="stat-row">
+            <div class="stat-box"><div class="n mono">8</div><div class="l">Semi-structured interviews (n=8)</div></div>
+            <div class="stat-box"><div class="n mono">3</div><div class="l">Core themes identified via thematic analysis</div></div>
+            <div class="stat-box"><div class="n mono">SDG 12</div><div class="l">Responsible consumption link established</div></div>
+          </div>
+
+          <h4>Recommendation</h4>
+          <p>A standardised Service Quality and Communication Protocol across UK branches — mandatory delay communication, dispatch-point quality checkpoints, and frontline training grounded in Hochschild's (1983) emotional labour framework — to rebuild trust without requiring a menu or pricing change.</p>
+
+          <div class="tool-tags">
+            <span class="tag">Semi-structured Interviews</span>
+            <span class="tag">Thematic Analysis</span>
+            <span class="tag">SERVQUAL</span>
+            <span class="tag">Qualitative Research</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Capabilities</span>
+      <h2 class="section-title">What I bring to a marketing team.</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cell"><h4>SEO &amp; Site Audits</h4><p>Semrush, GTmetrix, PageSpeed Insights, SEO Site Checkup</p></div>
+      <div class="skill-cell"><h4>Social Media Marketing</h4><p>Content strategy, Socialinsider, HubSpot Social</p></div>
+      <div class="skill-cell"><h4>Data &amp; Reporting</h4><p>Excel dashboards, SQL, KPI tracking</p></div>
+      <div class="skill-cell"><h4>Qualitative Research</h4><p>Semi-structured interviews, thematic analysis</p></div>
+      <div class="skill-cell"><h4>Presentation &amp; Design</h4><p>Canva, client-facing decks and reports</p></div>
+      <div class="skill-cell"><h4>Stakeholder Management</h4><p>Cross-functional teams, client presentations</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="certs">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Credentials</span>
+      <h2 class="section-title">Certifications</h2>
+    </div>
+    <div class="cert-list">
+      <div class="cert-row">
+        <div><div class="cert-name">Inbound Marketing</div><div class="cert-issuer">HubSpot Academy</div></div>
+        <div class="cert-year mono">Certified</div>
+      </div>
+      <div class="cert-row">
+        <div><div class="cert-name">Social Media Marketing</div><div class="cert-issuer">HubSpot Academy</div></div>
+        <div class="cert-year mono">Certified</div>
+      </div>
+      <div class="cert-row">
+        <div><div class="cert-name">McKinsey Forward Program</div><div class="cert-issuer">McKinsey.org</div></div>
+        <div class="cert-year mono">Completed</div>
+      </div>
+      <div class="cert-row">
+        <div><div class="cert-name">Data Analytics Programme</div><div class="cert-issuer">Mindless Academy, via NBS</div></div>
+        <div class="cert-year mono">Completed</div>
+      </div>
+      <div class="cert-row">
+        <div><div class="cert-name">SQL Essential Training</div><div class="cert-issuer">LinkedIn Learning</div></div>
+        <div class="cert-year mono">Completed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="contact">
+      <h2>Let's talk about a placement.</h2>
+      <p>I'm looking for a marketing placement starting around August 2026 — open to SEO, content, social, and brand strategy roles.</p>
+      <div class="contact-links">
+        <a href="mailto:vivek12345kumarroy@gmail.com" class="btn-ghost">Email me</a>
+        <a href="https://www.linkedin.com/in/vivekkumar-5b1b072b8" class="btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Vivek Kumar — Nottingham, UK</footer>
+
+<script>
+function toggleCase(id){
+  var body = document.getElementById(id);
+  var toggle = document.getElementById(id + '-toggle');
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open');
+  toggle.textContent = isOpen ? 'View case study ↓' : 'Close case study ↑';
+}
+</script>
+
+</body>
+</html>
